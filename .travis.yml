@@ -5,12 +5,11 @@ php:
   - 7.3
   - 7.4
 before_script:
-  - cp ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/xdebug.ini ~/.phpenv/xdebug.bak.ini
   - phpenv config-rm xdebug.ini
   - composer self-update
   - composer install
+  - pecl install -f xdebug-2.9.8
 script:
   - vendor/bin/phing
 after_script:
-  - phpenv config-add ~/.phpenv/xdebug.bak.ini
   - php vendor/bin/coveralls -v
